@@ -7,7 +7,8 @@ import Cards from './Cards';
 interface ResponseItemType {
     name: string,
     gender: string,
-    mass: string
+    mass: string,
+    bigger: boolean
 }
 @observer
 export class App extends React.Component<{}> {
@@ -15,9 +16,12 @@ export class App extends React.Component<{}> {
     @observable isLoading: boolean | undefined = true;
     @observable nums: number = 0;
     @observable wylosowaneKarty: Array<ResponseItemType> = [];
+    @observable isBigger: boolean = false;
 
     componentDidMount() {
+        this.isBigger = false;
         this.loadData();
+        this.wylosowaneKarty.map(el => el.bigger = this.isBigger);
     }
 
     loadData = async () => {
@@ -34,6 +38,7 @@ export class App extends React.Component<{}> {
     // }
 
     pickCards = () => {
+        this.isBigger = false;
         this.wylosowaneKarty = [];
         let tablica = this.results;
     
@@ -44,21 +49,27 @@ export class App extends React.Component<{}> {
     
             tablica = tablica.filter( (el) => el !== randomNum);
         }
-
+        
     }
 
     render() {
+
         const renderTitles = () => {
+            const arr = this.wylosowaneKarty.map(el => parseFloat(el.mass))
+            const arr2 = Math.max.apply(null, arr )
+
             if( this.wylosowaneKarty === null ) {
                 return null
                 } else {
                     return (
+                        
                         this.wylosowaneKarty.map( 
                             (el, id) => 
                                 <Cards 
                                     name={el.name}
                                     gender={el.gender}
                                     mass={el.mass}
+                                    bigger={parseFloat(el.mass) === arr2}
                                     key={id}                                      
                                 /> 
                             ) 

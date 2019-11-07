@@ -3,6 +3,14 @@ import { observer } from "mobx-react";
 import { observable } from "mobx";
 import styled from '@emotion/styled';
 
+interface CardsWrapperType {
+    bigger: boolean
+}
+
+const CardsWrapper = styled ('div')<CardsWrapperType>`
+    background: ${props => props.bigger ? 'red' : 'none'}
+`
+
 const TitleText = styled('h2')`
     font-size: 18px;
     margin-top: 16px;
@@ -17,7 +25,8 @@ const TitleText = styled('h2')`
 interface ResponseItemType {
     name: string,
     gender: string,
-    mass: string
+    mass: string,
+    bigger: boolean
 }
 
 // interface TitlesPropsType {
@@ -27,7 +36,6 @@ interface ResponseItemType {
 
 @observer
 class Cards extends React.Component<ResponseItemType> {
-   
 
     // componentDidUpdate(prevProps: ResponseItemType): void {
     //     if (this.props.name !== prevProps.name) {
@@ -35,17 +43,16 @@ class Cards extends React.Component<ResponseItemType> {
     //     }
     //   }
 
-
-
     render() {
+        console.log('xx',this.props.mass)
       return (
-            <React.Fragment>
+            <CardsWrapper bigger={this.props.bigger}>
                
                     <TitleText>{this.props.name}</TitleText>
                     <TitleText>{this.props.gender}</TitleText>
                     <TitleText>{this.props.mass}</TitleText>
 
-            </React.Fragment>
+            </CardsWrapper>
        );
    }
 }
