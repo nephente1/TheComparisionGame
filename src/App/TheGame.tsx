@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { observer } from "mobx-react";
-import { observable } from "mobx";
-
-import Cards, { TextInHeader, MainText, Button, NamesBox , ResultsWrapper, CardsWrapper, TitleText, NewGame } from './game.styles';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
+import Cards from './Cards';
+import { TextInHeader, MainText, Button, NamesBox , ResultsWrapper, CardsWrapper, TitleText, NewGame } from './game.styles';
 
 interface ResponseItemType {
     name: string,
@@ -47,11 +47,11 @@ class TheGame extends React.Component<{}> {
     }
 
     countPoints = () => {
-        const arr = this.chosenCards.map(el => parseFloat(el.mass))
-        const arr2 = Math.max.apply(null, arr )
-        let playerPt = this.chosenCards.map( (el, id) => id === 0 && parseFloat(el.mass) === arr2);
+        const massArray = this.chosenCards.map(el => parseFloat(el.mass));
+        const maxMass = Math.max.apply(null, massArray);
+        let playerPt = this.chosenCards.map( (el, id) => id === 0 && parseFloat(el.mass) === maxMass);
         playerPt[0] ? this.playerOnePoint += 1 : null;
-        let compPt = this.chosenCards.map( (el, id) => id === 1 && parseFloat(el.mass) === arr2);
+        let compPt = this.chosenCards.map( (el, id) => id === 1 && parseFloat(el.mass) === maxMass);
         compPt[1] ? this.computerPoint += 1 : null;
     }
 
@@ -63,8 +63,8 @@ class TheGame extends React.Component<{}> {
     }
 
     render() {
-        const arr = this.chosenCards.map(el => parseFloat(el.mass))
-        const arr2 = Math.max.apply(null, arr )
+        const massArray = this.chosenCards.map(el => parseFloat(el.mass));
+        const maxMass = Math.max.apply(null, massArray);
 
         const renderTitles = () => {
             if( this.chosenCards === null ) {
@@ -78,8 +78,8 @@ class TheGame extends React.Component<{}> {
                                     gender={el.gender}
                                     mass={el.mass}
                                     key={id}   
-                                    playerOneWins={id === 0 && parseFloat(el.mass) === arr2} 
-                                    computerWins={id === 1 && parseFloat(el.mass) === arr2}          
+                                    playerOneWins={id === 0 && parseFloat(el.mass) === maxMass} 
+                                    computerWins={id === 1 && parseFloat(el.mass) === maxMass}          
                                 /> 
                             ) 
                         )
