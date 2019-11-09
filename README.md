@@ -1,6 +1,6 @@
 # React App
 
-#used technologies: React.js, TypeScript, MobX
+#used technologies: React.js, TypeScript, MobX, Emotion
 
 ```
 start project locally:
