@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 interface CardsWrapperType {
     whoWins?: boolean;
 }
+
 export const App = styled('div')`
     padding: 25px;
     display: flex;
     justify-content: center;
     height: 100%;
 `;
-  
   
 export const MainText = styled('h1')`
     font-size: 26px;
@@ -75,4 +75,34 @@ export const ResultsWrapper = styled('div')`
 export const TextInHeader = styled('p')`
     margin-bottom: 5px;
     padding: 6px;
+`;
+
+export const Spinner = styled('div')`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &::after {
+        content: "";
+        width: 80px;
+        height: 80px;
+        border: 2px solid #f3f3f3;
+        border-top: 3px solid #f25a41;
+        border-radius: 100%;
+        will-change: transform;
+        animation: spin 1s infinite linear
+      }
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
 `;

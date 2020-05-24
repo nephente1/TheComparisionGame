@@ -1,10 +1,11 @@
 import * as React from 'react';
-import TheGame from './TheGame';
+import {GameBoard} from './GameBoard/GameBoard';
+import {AppBody} from '../../style/mainStyles';
 
 export const App = () => {
     return (
-        <div className="app">
-            <TheGame />
-        </div>
-        )
-    }
+        <AppBody>
+            <GameBoard />
+        </AppBody>
+    )
+}

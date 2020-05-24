@@ -3,24 +3,16 @@
 
 * {
     font-family: 'Righteous', sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
   }
 
-body {
-  background: #361133;
-}
-
-.app {
-  padding: 25px;
-  display: flex;
-  justify-content: center;
-  height: 100%;
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 
-.spinner:not([hidden]) {
+/* .spinner:not([hidden]) {
   position: fixed;
   top: 0;
   left: 0;
@@ -49,4 +41,4 @@ body {
   to {
     transform: rotate(360deg);
   }
-}
+} */
