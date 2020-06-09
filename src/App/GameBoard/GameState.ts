@@ -1,4 +1,4 @@
-import {observable} from 'mobx';
+import {observable, action} from 'mobx';
 
 interface ResponseItemType {
     name: string,
@@ -16,23 +16,31 @@ export class GameState {
 
     constructor(){}
 
-    loadData = async () => {
-        const response = await fetch(`https://swapi.dev/api/people/`);
-        const respJson = await response.json();
-        this.results = respJson.results;
-        this.isLoading = false;
+    @action async loadData() {
+        try {
+            let response = await fetch(`https://swapi.dev/api/people/`);
+            const respJson = await response.json();
+            this.results = respJson.results;
+            this.isLoading = false;
+        }
+        catch(err) {
+            // catches errors both in fetch and response.json
+            console.log('fetch error')
+            alert(err);
+        }
+
     }
 
     pickCards = () => {
         this.attemptsTaken += 1;
         this.chosenCards = [];
         let allElements = this.results;
-    
+
         for( let i = 0; i < 2; i++ ) {
             const index = Math.floor(Math.random() * allElements.length);
             const randomNum = allElements[index];
             this.chosenCards.push(randomNum);
-    
+
             allElements = allElements.filter( (el) => el !== randomNum);
         }
 
